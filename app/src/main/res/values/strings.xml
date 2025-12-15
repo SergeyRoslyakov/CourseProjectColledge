@@ -1,6 +1,16 @@
 <resources>
-    <string name="app_name">course_project</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="app_name">QualityCheck</string>
+
+    <string name="title_scan">Сканировать</string>
+    <string name="title_history">История</string>
+    <string name="title_analytics">Аналитика</string>
+    <string name="title_profile">Профиль</string>
+
+    <string name="scan_barcode">Наведите камеру на штрих-код</string>
+    <string name="scan_manual">Ввести вручную</string>
+    <string name="check_quality">Проверить качество</string>
+    <string name="no_checks">Нет проведенных проверок</string>
+
+    <string name="btn_save">Сохранить</string>
+    <string name="btn_cancel">Отмена</string>
 </resources>
