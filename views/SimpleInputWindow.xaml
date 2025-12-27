@@ -1,0 +1,53 @@
+﻿<Window x:Class="QualityAppWPF.Views.SimpleInputWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Ввод данных" 
+        Height="350" Width="400"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize">
+
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock x:Name="txtTitle" 
+                   FontSize="16" 
+                   FontWeight="Bold"
+                   Margin="0,0,0,15"/>
+
+        <StackPanel Grid.Row="1">
+            <!-- Первое поле -->
+            <TextBlock x:Name="lblField1" Margin="0,0,0,5"/>
+            <TextBox x:Name="txtField1" Margin="0,0,0,15"/>
+
+            <!-- Второе поле -->
+            <TextBlock x:Name="lblField2" Margin="0,0,0,5"/>
+            <TextBox x:Name="txtField2" Margin="0,0,0,15"/>
+
+            <!-- Третье поле (скрыто по умолчанию) -->
+            <TextBlock x:Name="lblField3" 
+                       Margin="0,0,0,5" 
+                       Visibility="Collapsed"/>
+            <TextBox x:Name="txtField3" 
+                     Margin="0,0,0,15" 
+                     Visibility="Collapsed"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" 
+                    Orientation="Horizontal" 
+                    HorizontalAlignment="Right">
+            <Button Content="❌ Отмена" 
+                    Width="80" 
+                    Margin="0,0,10,0"
+                    Click="BtnCancel_Click"/>
+            <Button Content="✅ Сохранить" 
+                    Width="80" 
+                    Background="#4CAF50"
+                    Foreground="White"
+                    Click="BtnSave_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

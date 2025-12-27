@@ -1,0 +1,44 @@
+﻿<Window x:Class="QualityAppWPF.Views.HistoryWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="История проверок" 
+        Height="600" Width="800"
+        WindowStartupLocation="CenterOwner">
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Панель фильтров -->
+        <Border Grid.Row="0" Background="#F5F5F5" Padding="10" Margin="0,0,0,10">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Фильтр по штрих-коду:" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                <TextBox x:Name="txtFilterBarcode" Width="150" Margin="0,0,10,0"/>
+                <Button Content="🔍 Применить" Width="100" Click="BtnApplyFilter_Click"/>
+                <Button Content="🔄 Сбросить" Width="100" Margin="10,0,0,0" Click="BtnResetFilter_Click"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Список проверок -->
+        <DataGrid x:Name="dgChecks" Grid.Row="1" AutoGenerateColumns="False" 
+                  IsReadOnly="True" SelectionMode="Single">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Дата" Binding="{Binding CheckDate, StringFormat={}{0:dd.MM.yyyy HH:mm}}"/>
+                <DataGridTextColumn Header="Штрих-код" Binding="{Binding ProductBarcode}" Width="120"/>
+                <DataGridTextColumn Header="Продукт" Binding="{Binding ProductName}" Width="150"/>
+                <DataGridTextColumn Header="Оценка" Binding="{Binding Rating}">
+                    <DataGridTextColumn.CellStyle>
+                        <Style TargetType="DataGridCell">
+                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridTextColumn.CellStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Комментарий" Binding="{Binding Comment}" Width="200"/>
+                <DataGridTextColumn Header="Инспектор" Binding="{Binding Inspector}"/>
+                <DataGridTextColumn Header="Место" Binding="{Binding Location}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>

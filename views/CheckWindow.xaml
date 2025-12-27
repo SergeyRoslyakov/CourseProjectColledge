@@ -1,0 +1,54 @@
+﻿<Window x:Class="QualityAppWPF.Views.CheckWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Проверка качества продукта" 
+        Height="500" Width="500"
+        WindowStartupLocation="CenterOwner">
+
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="✅ Проверка качества" 
+                   FontSize="20" FontWeight="Bold"
+                   Margin="0,0,0,15"/>
+
+        <Border Grid.Row="1" BorderBrush="#4CAF50" BorderThickness="1" Padding="15">
+            <StackPanel>
+                <TextBlock Text="Продукт:" FontWeight="Bold" Margin="0,0,0,10"/>
+                <TextBlock x:Name="txtProductInfo" Margin="0,0,0,20"/>
+
+                <TextBlock Text="Оценка качества (1-5):" Margin="0,0,0,5"/>
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,15">
+                    <RadioButton x:Name="rbRating1" Content="1" GroupName="Rating" Margin="5"/>
+                    <RadioButton x:Name="rbRating2" Content="2" GroupName="Rating" Margin="5"/>
+                    <RadioButton x:Name="rbRating3" Content="3" GroupName="Rating" Margin="5" IsChecked="True"/>
+                    <RadioButton x:Name="rbRating4" Content="4" GroupName="Rating" Margin="5"/>
+                    <RadioButton x:Name="rbRating5" Content="5" GroupName="Rating" Margin="5"/>
+                </StackPanel>
+
+                <TextBlock Text="Комментарий:" Margin="0,0,0,5"/>
+                <TextBox x:Name="txtComment" Height="80" 
+                         VerticalScrollBarVisibility="Auto"
+                         AcceptsReturn="True"
+                         TextWrapping="Wrap"
+                         Margin="0,0,0,15"/>
+
+                <TextBlock Text="Инспектор:" Margin="0,0,0,5"/>
+                <TextBox x:Name="txtInspector" Text="Оператор" Margin="0,0,0,15"/>
+
+                <TextBlock Text="Местоположение:" Margin="0,0,0,5"/>
+                <TextBox x:Name="txtLocation" Text="Магазин" Margin="0,0,0,15"/>
+            </StackPanel>
+        </Border>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Content="❌ Отмена" Width="80" Margin="0,0,10,0" Click="BtnCancel_Click"/>
+            <Button Content="💾 Сохранить" Width="100" Background="#4CAF50" 
+                    Foreground="White" Click="BtnSave_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

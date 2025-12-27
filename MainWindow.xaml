@@ -1,0 +1,192 @@
+﻿<Window x:Class="QualityAppWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Quality Check App" 
+        Height="600" Width="900"
+        WindowStartupLocation="CenterScreen">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Верхняя панель -->
+        <Border Grid.Row="0" Background="#2E7D32" Padding="10">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBlock Text="📱 Оценка качества продуктов" 
+                           FontSize="24" 
+                           Foreground="White" 
+                           FontWeight="Bold"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Основное содержимое -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Боковая панель навигации -->
+            <Border Grid.Column="0" Background="#F5F5F5">
+                <StackPanel Margin="10">
+                    <Button x:Name="btnCheck" 
+                            Content="✅ Провести проверку" 
+                            Height="60" 
+                            FontSize="16"
+                            Margin="0,10,0,5"
+                            Click="BtnCheck_Click"/>
+
+                    <Button x:Name="btnHistory" 
+                            Content="📋 История проверок" 
+                            Height="60" 
+                            FontSize="16"
+                            Margin="0,5"
+                            Click="BtnHistory_Click"/>
+
+                    <Button x:Name="btnStats" 
+                            Content="📊 Статистика" 
+                            Height="60" 
+                            FontSize="16"
+                            Margin="0,5"
+                            Click="BtnStats_Click"/>
+
+                    <!-- Кнопка админ-панели (только для администраторов) -->
+                    <Button x:Name="btnAdmin" 
+                            Content="⚙️ Админ-панель" 
+                            Height="60" 
+                            FontSize="16"
+                            Margin="0,5"
+                            Visibility="Collapsed"
+                            Click="BtnAdmin_Click"/>
+                    <!-- В боковой панели навигации MainWindow.xaml добавляем кнопку: -->
+                    <Button x:Name="btnProductsList" 
+        Content="📋 Список продуктов" 
+        Height="60" 
+        FontSize="16"
+        Margin="0,5"
+        Click="BtnProductsList_Click"/>
+
+                    <Separator Margin="0,20,0,10"/>
+
+                    <Button x:Name="btnLogout" 
+                            Content="🚪 Выйти" 
+                            Height="50" 
+                            FontSize="14"
+                            Background="#FF5722"
+                            Foreground="White"
+                            Click="BtnLogout_Click"/>
+                </StackPanel>
+            </Border>
+
+            <!-- Основная область -->
+            <Border Grid.Column="1" Padding="20">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Статус БД и информация о пользователе -->
+                    <Border Grid.Row="0" 
+                            Background="{Binding DbStatusColor}" 
+                            CornerRadius="5"
+                            Padding="10"
+                            Margin="0,0,0,20">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Grid.Column="0" Orientation="Horizontal">
+                                <TextBlock Text="{Binding DbStatusIcon}" FontSize="20" Margin="0,0,10,0"/>
+                                <TextBlock Text="{Binding DbStatusText}" FontSize="14" VerticalAlignment="Center"/>
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="1" HorizontalAlignment="Center">
+                                <TextBlock x:Name="txtUserInfo" 
+                                           Text="Добро пожаловать!" 
+                                           FontSize="16" 
+                                           FontWeight="Bold"/>
+                                <TextBlock x:Name="txtUserRole" 
+                                           Text="" 
+                                           FontSize="12"/>
+                            </StackPanel>
+
+                            <Button Grid.Column="2"
+                                    x:Name="btnRefresh"
+                                    Content="🔄 Обновить"
+                                    Width="100"
+                                    Height="30"
+                                    Background="Transparent"
+                                    BorderBrush="#4CAF50"
+                                    BorderThickness="1"
+                                    Foreground="#4CAF50"
+                                    Click="BtnRefresh_Click"/>
+                        </Grid>
+                    </Border>
+
+                    <!-- Контентная область -->
+                    <ContentControl Grid.Row="1" x:Name="ContentArea">
+                        <Grid>
+                            <!-- Домашняя страница по умолчанию -->
+                            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <TextBlock Text="🏠 Добро пожаловать!" 
+                                           FontSize="32" 
+                                           FontWeight="Bold"
+                                           Foreground="#2E7D32"
+                                           Margin="0,0,0,20"/>
+
+                                <TextBlock Text="Выберите действие в меню слева" 
+                                           FontSize="18"
+                                           TextAlignment="Center"/>
+
+                                <Border BorderBrush="#4CAF50" 
+                                        BorderThickness="2" 
+                                        CornerRadius="10"
+                                        Padding="20"
+                                        Margin="0,30,0,0">
+                                    <StackPanel>
+                                        <TextBlock Text="📊 Статистика за сегодня:" 
+                                                   FontSize="16" 
+                                                   FontWeight="Bold"
+                                                   Margin="0,0,0,10"/>
+
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                            <StackPanel Margin="20">
+                                                <TextBlock Text="Всего продуктов" FontSize="14"/>
+                                                <TextBlock x:Name="txtTotalProducts" Text="0" 
+                                                           FontSize="24" 
+                                                           FontWeight="Bold"
+                                                           Foreground="#2196F3"/>
+                                            </StackPanel>
+
+                                            <StackPanel Margin="20">
+                                                <TextBlock Text="Проверок сегодня" FontSize="14"/>
+                                                <TextBlock x:Name="txtChecksToday" Text="0" 
+                                                           FontSize="24" 
+                                                           FontWeight="Bold"
+                                                           Foreground="#4CAF50"/>
+                                            </StackPanel>
+
+                                            <StackPanel Margin="20">
+                                                <TextBlock Text="Средний рейтинг" FontSize="14"/>
+                                                <TextBlock x:Name="txtAvgRating" Text="0.0" 
+                                                           FontSize="24" 
+                                                           FontWeight="Bold"
+                                                           Foreground="#FF9800"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Border>
+                            </StackPanel>
+                        </Grid>
+                    </ContentControl>
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
+</Window>

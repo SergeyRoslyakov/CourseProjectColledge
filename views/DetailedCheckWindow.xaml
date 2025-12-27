@@ -1,0 +1,71 @@
+﻿<Window x:Class="QualityAppWPF.Views.DetailedCheckWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Детальная проверка параметров" 
+        Height="600" Width="800"
+        WindowStartupLocation="CenterOwner">
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="📋 Детальная проверка параметров" 
+                   FontSize="18" FontWeight="Bold"
+                   Margin="0,0,0,10"/>
+
+        <!-- Список параметров -->
+        <DataGrid x:Name="dgParameters" 
+                  Grid.Row="1"
+                  AutoGenerateColumns="False"
+                  CanUserAddRows="False"
+                  Margin="0,0,0,10">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Параметр" 
+                                    Binding="{Binding Name}" 
+                                    Width="150"
+                                    IsReadOnly="True"/>
+                <DataGridTextColumn Header="Описание" 
+                                    Binding="{Binding Description}" 
+                                    Width="200"
+                                    IsReadOnly="True"/>
+                <DataGridTextColumn Header="Значение" 
+                                    Width="100">
+                    <DataGridTextColumn.Binding>
+                        <MultiBinding StringFormat="{}{0} {1}">
+                            <Binding Path="Value"/>
+                            <Binding Path="Unit"/>
+                        </MultiBinding>
+                    </DataGridTextColumn.Binding>
+                </DataGridTextColumn>
+                <DataGridCheckBoxColumn Header="Пройден" 
+                                        Binding="{Binding IsPassed}"/>
+                <DataGridTextColumn Header="Примечания" 
+                                    Binding="{Binding Notes}" 
+                                    Width="200"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!-- Кнопки управления -->
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Content="➕ Добавить параметр" 
+                    Width="150" 
+                    Height="35"
+                    Margin="0,0,10,0"
+                    Click="BtnAddParameter_Click"/>
+            <Button Content="❌ Отмена" 
+                    Width="100" 
+                    Height="35"
+                    Margin="0,0,10,0"
+                    Click="BtnCancel_Click"/>
+            <Button Content="💾 Сохранить" 
+                    Width="100" 
+                    Height="35"
+                    Background="#4CAF50"
+                    Foreground="White"
+                    Click="BtnSave_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>
